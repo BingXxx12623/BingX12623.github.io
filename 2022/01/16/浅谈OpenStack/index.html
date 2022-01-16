@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>浅谈OpenStack | bingx的胡言乱语</title><meta name="author" content="bingx12623"><meta name="copyright" content="bingx12623"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="何为open stack（基于Linux来进行实现） Open stack 是一个美国国家航空航天局和rack space合作研发 以Apache许可证授权，并且是一个自由软件和开放源代码项目 open stack是什么？ 是一个clouds os 云操作系统内核 (类似红帽 华为 都做了商业版本的操作系统内核） 国内95的云计算都是基于open stack来进行实现的 国内 阿里 飞天系统 嫦娥">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈OpenStack">
+<meta property="og:url" content="http://example.com/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/index.html">
+<meta property="og:site_name" content="bingx的胡言乱语">
+<meta property="og:description" content="何为open stack（基于Linux来进行实现） Open stack 是一个美国国家航空航天局和rack space合作研发 以Apache许可证授权，并且是一个自由软件和开放源代码项目 open stack是什么？ 是一个clouds os 云操作系统内核 (类似红帽 华为 都做了商业版本的操作系统内核） 国内95的云计算都是基于open stack来进行实现的 国内 阿里 飞天系统 嫦娥">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picsum.photos/id/782/5891/3933">
+<meta property="article:published_time" content="2022-01-16T07:44:39.000Z">
+<meta property="article:modified_time" content="2022-01-16T07:49:59.090Z">
+<meta property="article:author" content="bingx12623">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picsum.photos/id/782/5891/3933"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈OpenStack',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-01-16 15:49:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_1.css" ><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zyoushuo/Blog@latest/hexo/css/loading_style_2.css" ><meta name="generator" content="Hexo 6.0.0"></head><body><!--if theme.preloader //!=partial('includes/loading/loading', {}, {cache: true})
+if theme.preloader
+ !=partial('includes/loading/loaded.ejs', {}, {cache:theme.fragment_cache})--><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/1d5af95e0529492a8d16b6bd5a1a2755.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://picsum.photos/id/782/5891/3933')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">bingx的胡言乱语</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浅谈OpenStack</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-16T07:44:39.000Z" title="发表于 2022-01-16 15:44:39">2022-01-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-16T07:49:59.090Z" title="更新于 2022-01-16 15:49:59">2022-01-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="浅谈OpenStack"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>何为open stack（基于Linux来进行实现）</strong></p>
+<p>Open stack 是一个美国国家航空航天局和rack space合作研发</p>
+<p>以Apache许可证授权，并且是一个自由软件和开放源代码项目</p>
+<p>open stack是什么？</p>
+<p>是一个clouds os 云操作系统内核 (类似红帽 华为 都做了商业版本的操作系统内核）</p>
+<p>国内95的云计算都是基于open stack来进行实现的</p>
+<p>国内</p>
+<p>阿里 飞天系统 嫦娥系统。。。都自称为自研（阿里是08年开始自研 open stack是11年开始实现）</p>
+<p><img src="blob:file:///a6f493c5-52cf-4ee3-9aef-8ca6e2b6b2a6" alt="Pasted Graphic 1.png"></p>
+<p>版本号是通过26个字母来进行规定，当前为v版（基本每年更新两个版本）</p>
+<p> open stack认证可以学习一下</p>
+<p>本次学习的相关资料的版本号都是基于 rhosp13 (红帽的open stack命名）</p>
+<p>#查看商业版是基于open stack哪个版本开发的方法</p>
+<p><img src="blob:file:///8aaac612-9258-43ab-ad75-ba9afd8f5cd7" alt="Pasted Graphic 2.png"></p>
+<p>输入rpm -qa|grep nova</p>
+<p>查看nova的版本号</p>
+<p>然后进入<a target="_blank" rel="noopener" href="http://release.openstack.org/">release.openstack.org</a> 查看nova对应的版本号 </p>
+<p>总结：可以通过其他软件来判断open stack商业版本对应的开源版本版本号</p>
+<p>（商业版本是无法紧跟开源版本的版本号的）</p>
+<p>可以根据版本号来进行判断是哪种特性</p>
+<p><img src="blob:file:///926677c8-323f-46d5-ab6b-c957d2662888" alt="Pasted Graphic 3.png"></p>
+<p>#云和虚拟化的区别</p>
+<p><img src="blob:file:///91f4c56d-3e67-44f3-ad7c-32739cd56757" alt="Pasted Graphic 4.png"></p>
+<p><img src="blob:file:///19a5787c-dffd-4f62-af19-0de281b05cbb" alt="Pasted Graphic 6.png"></p>
+<p><img src="blob:file:///e9fc24d8-f31d-454a-a423-552b3d267305" alt="Pasted Graphic 5.png"></p>
+<p>按照不同的商业模式可以分为 ：公有云</p>
+<pre><code>                    私有云
+</code></pre>
+<p>​                           混合云（未来的一个流行趋势，提供给用户一个操作界面）</p>
+<p>按照部署模式可以分为：Saas 软件即服务 （各种网页端软件）</p>
+<p>​                         Pass docker  K8S 平台即服务</p>
+<p>​                     Lass openstack 基础架构即服务</p>
+<p>openstack不是云</p>
+<p>OpenStack只是构建云的关键组件</p>
+<p>云要完全构建起来必须包含内核，骨干，框架，总线</p>
+<p>#商业版本和开源版本openstack的不同</p>
+<p><img src="blob:file:///a0c08013-04c2-4c3f-9c25-884dc5c336ba" alt="Pasted Graphic 7.png"></p>
+<p>部署工具：1.packstack</p>
+<p>​          2.puppet</p>
+<p>​          3.tripleO(华为基于此部署工具实现部署）</p>
+<p>​          4.Ansible</p>
+<p>#开源虚拟化技术</p>
+<p>XEN 思杰支持</p>
+<p>KVM 红帽支持</p>
+<p>#容器</p>
+<p>相比OpenStack更加轻量，部署起来也更加方便</p>
+<p>现在也有物理机上跑OpenStack 在云上跑docker</p>
+<p>腾讯</p>
+<p>OpenStack （由容器实现，上面再跑容器的服务）</p>
+<p>控制节点： nova cinder glance 都用容器</p>
+<p>华为（不用容器是为了大规模实现）</p>
+<p>控制节点 三个 集群用zookeeper</p>
+<p>每个节点用256GB内存 2TB*2=RAID1</p>
+<p>40个虚拟机 （20个虚拟机）</p>
+<p>#OpenStack核心组件</p>
+<p>9大组件及其作用</p>
+<p>1.HORIZON 使用Apache实现，用于实现图形化界面</p>
+<p><img src="blob:file:///55ab63c4-94e1-4e28-b83b-fedf95e46358" alt="Pasted Graphic 8.png"></p>
+<p>2.NOVA OpenStack的核心组件 </p>
+<p>Nova负责计算</p>
+<p><img src="blob:file:///5cf75a90-5099-426f-8d26-d5ecc9a6f899" alt="Pasted Graphic 10.png"></p>
+<p>-1.nova controller 控制节点（至少布置两台，做高可用 比如controller 01 controller02 做高可用 HA ）注：华为为3个控制节点</p>
+<p>Controller节点可用通过调度功能来对不同的主机来进行对接</p>
+<p>OpenStack也可以管理裸金属，也可以管理不同的主机</p>
+<p><img src="blob:file:///1f0016da-4ef5-4cac-bc6c-0c9c42c7d0d5" alt="Pasted Graphic 9.png"></p>
+<p>-2.nova compute 计算节点</p>
+<p>（OpenStack可以对接不同的虚拟化平台，进行集中管理）</p>
+<p>3.glance 用于提供镜像</p>
+<p><img src="blob:file:///022aebaf-d077-4fc8-bb09-903aadc82f01" alt="Pasted Graphic 11.png"></p>
+<p>kvm虚拟机磁盘格式为 qcow2</p>
+<p>Vmvare 虚拟机磁盘格式为 vmdk格式</p>
+<p>微软的hyper-v虚拟机磁盘格式为 VHD格式</p>
+<p>ovf (open virtual fomal 开放虚拟化格式)</p>
+<p>4.Swift 对象存储 像百度网盘一样，glance上的数据就可以保存在这里</p>
+<p><img src="blob:file:///a62018ea-3d4d-43e2-a248-7ee667eda08b" alt="Pasted Graphic 12.png"></p>
+<p>注：obs是Swift的统称，很多obs是通过Swift来进行实现的</p>
+<p>5.NEUTRON 在云上添加的网络都是通过NEUTRON来进行实现的</p>
+<p>6.块存储cinder</p>
+<p>7.head 编排服务 当需要大批量管理多台云主机时，可以用到</p>
+<p>8.ceilomerter计量服务 用于收集，存储数据的情况，监控使用情况（公有云用这个计费，这个可以自己定义的）</p>
+<p><img src="blob:file:///43b36b0a-51ff-4813-bb7f-ce344a62ec5c" alt="Pasted Graphic 13.png"></p>
+<p>9.keystone openstack深度管理 </p>
+<p><img src="blob:file:///bbf6570e-e76f-49b7-9781-7e827a87934d" alt="Pasted Graphic 14.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">bingx12623</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/">http://example.com/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">bingx的胡言乱语</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://picsum.photos/id/782/5891/3933" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/05/%E6%88%91%E5%9F%8E%EF%BC%81%E6%88%91%E5%9F%8E/"><img class="next-cover" src="https://picsum.photos/id/782/5891/3933" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">我城！我城!</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/1d5af95e0529492a8d16b6bd5a1a2755.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">bingx12623</div><div class="author-info__description">一个伪大、睾伤、奸强者的自我救赎</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/" title="浅谈OpenStack"><img src="https://picsum.photos/id/782/5891/3933" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浅谈OpenStack"/></a><div class="content"><a class="title" href="/2022/01/16/%E6%B5%85%E8%B0%88OpenStack/" title="浅谈OpenStack">浅谈OpenStack</a><time datetime="2022-01-16T07:44:39.000Z" title="发表于 2022-01-16 15:44:39">2022-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/05/%E6%88%91%E5%9F%8E%EF%BC%81%E6%88%91%E5%9F%8E/" title="我城！我城!"><img src="https://picsum.photos/id/782/5891/3933" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我城！我城!"/></a><div class="content"><a class="title" href="/2022/01/05/%E6%88%91%E5%9F%8E%EF%BC%81%E6%88%91%E5%9F%8E/" title="我城！我城!">我城！我城!</a><time datetime="2022-01-05T13:35:05.000Z" title="发表于 2022-01-05 21:35:05">2022-01-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/03/my-plan/" title="那些花儿"><img src="https://picsum.photos/id/782/5891/3933" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些花儿"/></a><div class="content"><a class="title" href="/2022/01/03/my-plan/" title="那些花儿">那些花儿</a><time datetime="2022-01-03T07:11:57.000Z" title="发表于 2022-01-03 15:11:57">2022-01-03</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://picsum.photos/id/782/5891/3933')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By bingx12623</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
